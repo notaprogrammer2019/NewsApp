@@ -9,7 +9,6 @@ const apiUrl = 'http://newsapi.org/v2';
 async function getNews(apiKey, apiUrl, Switch, country, search = null) {
   try {
     let response;
-    console.log(1);
     switch(Switch) {
       case 1: response  = await fetch(`${apiUrl}/everything?q=${search}&language=${country[1]}&apiKey=${apiKey}`);
       break;
@@ -21,7 +20,7 @@ async function getNews(apiKey, apiUrl, Switch, country, search = null) {
     data = data.articles;
     renderNews(data);
   } catch (err) {
-    return Promise.reject(err);
+    M.toast({html: err, classes: 'rounded'});
   }
 }; 
 
@@ -33,7 +32,6 @@ form.addEventListener('submit', e => {
 })
 
 function responseNews() {
-  console.log(2);
   const countrySelect = form.elements['country'];
   const searchInput = form.elements['search'];
   let countryMassive = countrySelect.value.split('_');
@@ -46,9 +44,7 @@ function responseNews() {
 }
 
 function renderNews(news) {
-  console.log(3);
   console.log(news);
-
   const container = document.querySelector('.newsContainer .row')
   if (container.children.length) {
     container.innerHTML = '';
@@ -63,7 +59,7 @@ function renderNews(news) {
 
 function newsTemplate({ title, description, url, urlToImage}) {
   return `
-  <div class="col l6 m6 s12">
+  <div class="col xl4 l6 m12 s12">
     <div class="card">
       <div class="card-image">
         <img src="${urlToImage}">
