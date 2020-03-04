@@ -44,7 +44,6 @@ function responseNews() {
 }
 
 function renderNews(news) {
-  console.log(news);
   const container = document.querySelector('.newsContainer .row')
   if (container.children.length) {
     container.innerHTML = '';
@@ -59,11 +58,11 @@ function renderNews(news) {
 
 function newsTemplate({ title, description, url, urlToImage}) {
   return `
-  <div class="col xl4 l6 m12 s12">
+  <div class="col xl4 l6 m6 s12">
     <div class="card">
       <div class="card-image">
         <img src="${urlToImage}">
-        <span class="card-title">${title || ''}</span>
+        <span class="card-title card-title-custom">${title || ''}</span>
       </div>
       <div class="card-content">
         <p>${description || ''}</p>
